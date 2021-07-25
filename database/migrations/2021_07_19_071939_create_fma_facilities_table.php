@@ -34,6 +34,6 @@ class CreateFMAFacilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('f_m_a__facilities');
+        Schema::dropIfExists('fma_facilities');
     }
 }
