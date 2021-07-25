@@ -4,11 +4,13 @@
 namespace App\Facade;
 
 
+use Illuminate\Http\JsonResponse;
+
 class BaseResponse{
     public bool $status = false;
-    public $code = "500";
+    public mixed $code = "500";
     public string $message = "Some Message";
-    public $data = null;
+    public mixed $data = null;
 
     public function __construct($data, string $message, $code = 200){
         $this->status = ($code < 400);
@@ -17,7 +19,7 @@ class BaseResponse{
         $this->data = $data;
     }
 
-    public static function ok($data, string $message, $code = 200){
+    public static function ok($data, string $message, $code = 200): JsonResponse{
         return response()->json(
             new BaseResponse(
                 $data,
@@ -27,7 +29,8 @@ class BaseResponse{
             , $code);
     }
 
-    public static function error(string $message, $code = 500, $data = null){
+    public static function error(string $message, $code = 500, $data = null): JsonResponse
+    {
         return response()->json(
             new BaseResponse(
                 $data,
@@ -37,7 +40,7 @@ class BaseResponse{
         );
     }
 
-    public static function custom($code, string $message, $data = null){
+    public static function custom($code, string $message, $data = null): JsonResponse{
         return response()->json(
             new BaseResponse(
                 $data,
