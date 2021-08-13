@@ -4,7 +4,12 @@
 namespace App\Facade;
 
 
+use App\Model\UMA\User;
+use App\Repository\UMA\Impl\TokenRepositoryImpl;
+use DateTime;
+use Exception;
 use Firebase\JWT\JWT;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @author https://github.com/CuaMcCarsaree44
@@ -31,5 +36,27 @@ class TokenFacade
         return JWT::decode($token, env('JWT_SECRET'), ['HS256']);
     }
 
+    /**
+     * @throws Exception
+     */
+    public function createPublicToken(User $user): string {
 
+        $mask = Uuid::uuid4()->toString();
+        $real_token = $this->jwtEncoder($user);
+
+        (new TokenRepositoryImpl())->createToken(
+            $real_token,
+            $mask,
+            (new DateTime())->setTimestamp(time() + (3600 * 24 * 7))
+        );
+
+        return $mask;
+    }
+
+    public function decodePublicToken(string $token): User {
+
+
+
+    }
 }
+

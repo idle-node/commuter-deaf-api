@@ -5,6 +5,7 @@ namespace App\Common\Exceptions;
 
 
 use App\Repository\SLM\Impl\ErrorLogRepositoryImpl;
+use Error;
 use Throwable;
 
 /**
@@ -14,13 +15,13 @@ use Throwable;
  * BaseException
  * Insert Description Here...
  */
-class BaseException
+class BaseException extends Error
 {
-    protected string $code;
-    protected string $message;
-    protected $data = null;
+    protected $code;
+    protected $message;
+    protected mixed $data = null;
 
-    public function __construct($message, $code, $data = null)
+    public function __construct(string $message = "", string $code = "", mixed $data = null)
     {
         $this->code = $code;
         $this->message = $message;
@@ -35,6 +36,7 @@ class BaseException
             $message
         );
 
-        throw new \Error("Error $code : $message", 500);
+        parent::__construct("Error [$code] : $message", 500, null);
+
     }
 }

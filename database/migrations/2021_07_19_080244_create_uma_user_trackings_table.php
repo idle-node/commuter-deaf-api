@@ -29,6 +29,6 @@ class CreateUMAUserTrackingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('u_m_a__user__trackings');
+        Schema::dropIfExists('uma_user_tracking');
     }
 }

@@ -29,6 +29,6 @@ class CreateUMAOtpVerificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('u_m_a__otp__verifications');
+        Schema::dropIfExists('uma_otp_verification');
     }
 }

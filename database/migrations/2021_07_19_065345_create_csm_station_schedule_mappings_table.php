@@ -43,6 +43,6 @@ class CreateCSMStationScheduleMappingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c_s_m__station__schedule__mappings');
+        Schema::dropIfExists('csm_station_schedule_mappings');
     }
 }

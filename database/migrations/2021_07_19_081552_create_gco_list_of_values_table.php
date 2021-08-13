@@ -32,6 +32,6 @@ class CreateGCOListOfValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('g_c_o__list__of__values');
+        Schema::dropIfExists('gco_list_of_values');
     }
 }

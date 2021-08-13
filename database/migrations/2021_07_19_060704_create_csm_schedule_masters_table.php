@@ -29,6 +29,6 @@ class CreateCSMScheduleMastersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c_s_m__schedule__masters');
+        Schema::dropIfExists('csm_schedule_masters');
     }
 }

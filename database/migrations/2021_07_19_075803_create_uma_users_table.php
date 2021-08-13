@@ -34,6 +34,6 @@ class CreateUMAUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('u_m_a__users');
+        Schema::dropIfExists('uma_users');
     }
 }

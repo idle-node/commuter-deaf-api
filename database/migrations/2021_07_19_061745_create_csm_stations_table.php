@@ -37,6 +37,6 @@ class CreateCSMStationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c_s_m__stations');
+        Schema::dropIfExists('csm_stations');
     }
 }
