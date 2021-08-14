@@ -1,22 +1,12 @@
 <?php
 
-
-namespace App\Model;
-
+namespace App\Model\CSM;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/**
- * @author https://github.com/CuaMcCarsaree44
- * @since July, 24 2021 03:04:25
- *
- * ScheduleMaster
- * Insert Description Here...
- */
 class ScheduleMaster extends Model
 {
-
     use SoftDeletes;
 
     public $timestamps = true;
@@ -31,5 +21,5 @@ class ScheduleMaster extends Model
         'deleted_at'
     ];
 
-    protected $table = "csm_schedule_master";
+    protected $table = "csm_schedule_masters";
 }
