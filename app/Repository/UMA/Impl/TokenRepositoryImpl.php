@@ -23,11 +23,14 @@ class TokenRepositoryImpl implements TokenRepository
         DateTime $expired_time
     ): string
     {
-        BearerToken::create([
-            "uuid" => $uuid,
-            "token" => $real_token,
-            "expired_time" => $expired_time
-        ]);
+        $bearer = new BearerToken();
+        $bearer->uuid = $uuid;
+        $bearer->token = $real_token;
+        $bearer->expired_time = $expired_time;
+        $bearer->created_at = new DateTime('now');
+        $bearer->save();
+
+        return $uuid;
     }
 
     /**
@@ -70,6 +73,10 @@ class TokenRepositoryImpl implements TokenRepository
             ->get()
             ->first();
 
+        if($bearer === null){
+            throw new TokenUnauthorizedException();
+        }
 
+        return $bearer->token;
     }
 }
