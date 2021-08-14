@@ -16,6 +16,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class User extends Model
 {
+    /**
+     * @static
+     * 
+     * Slug to determine user's status
+     */
+    const ACTIVATED = 1;
+    const NOT_ACTIVATED = 0;
+    const SUSPENDED = 2;
+    const BANNED = 3;
 
     use SoftDeletes;
 
