@@ -33,3 +33,8 @@ Route::group(['prefix' => 'uma'], function() {
 
 
 });
+
+Route::group(['prefix' => 'sma'], function () {
+    
+    Route::get('home', 'Api\HomeController@home');
+});
