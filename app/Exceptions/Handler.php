@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Facade\BaseResponse;
+use App\Facade\Console;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -51,7 +52,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        #return parent::render($request, $exception);
+        Console::writeLine(
+            $exception->getMessage() . " at \n" .
+            $exception->getFile() . ":" . $exception->getLine() . 
+            "\n\n" 
+            . $exception->getTraceAsString()
+            . "\n\n\n\n"
+        );
+
+        // return parent::render($request, $exception);
         return BaseResponse::error(
             $exception->getMessage(),
             $exception->getCode() === 0 ? 500 : $exception->getCode(),
