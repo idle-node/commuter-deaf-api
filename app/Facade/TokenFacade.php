@@ -3,7 +3,7 @@
 
 namespace App\Facade;
 
-
+use App\Common\Exceptions\UMA\TokenExpiredException;
 use App\Model\UMA\User;
 use App\Repository\UMA\Impl\TokenRepositoryImpl;
 use DateTime;
@@ -23,17 +23,21 @@ class TokenFacade
     private function jwtEncoder(object $payload): string {
 
         $jwt_config = (object) [
-            "pwd" => $payload,
+            "pyl" => $payload,
             "iss" => "laravel-jwt",
             "iat" => time(),
             "exp" => time() + (3600 * 24 * 7) // One week
         ];
 
-        return JWT::encode($jwt_config, env('JWT_SECRET'));
+        return JWT::encode($jwt_config, env('APP_KEY'));
     }
 
     private function jwtDecoder(string $token): object {
-        return JWT::decode($token, env('JWT_SECRET'), ['HS256']);
+        try{
+            return JWT::decode($token, env('APP_KEY'), ['HS256']);
+        }catch(\Throwable $e){
+            throw new TokenExpiredException();
+        }
     }
 
     /**
@@ -44,6 +48,8 @@ class TokenFacade
         $mask = Uuid::uuid4()->toString();
         $real_token = $this->jwtEncoder($user);
 
+        Console::writeLine("Real Token: " . $real_token);
+
         (new TokenRepositoryImpl())->createToken(
             $real_token,
             $mask,
@@ -53,10 +59,14 @@ class TokenFacade
         return $mask;
     }
 
-    public function decodePublicToken(string $token): User {
+    public function decodePublicToken(string $token): object {
 
+        /**
+         * Skipping Bearer *
+         */
+        $token = (new TokenRepositoryImpl())->getJWTByToken(substr($token, 7, strlen($token)));
 
-
+        return $this->jwtDecoder($token);
     }
 }
 
