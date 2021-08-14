@@ -18,4 +18,6 @@ class BearerToken extends Model
     public $timestamps = false;
 
     public $table = 'uma_bearer_token';
+
+    protected $fillable = ['uuid'];
 }

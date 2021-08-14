@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ErrorLog extends Model
 {
-    public $timestamps = true;
+    public $timestamps = false;
 
     /**
      * @protected

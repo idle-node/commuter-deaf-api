@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Common\Exceptions\UMA;
 
 
@@ -13,13 +12,14 @@ use App\Common\Exceptions\BaseException;
  * TokenUnauthorizedException
  * Insert Description Here...
  */
-class TokenUnauthorizedException extends BaseException
+class UserNotFoundException extends BaseException
 {
-    public function __construct()
+    public function __construct($error_messages)
     {
         parent::__construct(
-            "Your session is expired. Please login again.",
-            "UMA0001"
+            "Bad Request.",
+            "400",
+            $error_messages
         );
     }
 }
