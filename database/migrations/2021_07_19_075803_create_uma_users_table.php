@@ -16,10 +16,11 @@ class CreateUMAUsersTable extends Migration
         Schema::create('uma_users', function (Blueprint $table) {
             $table->id();
             $table->string("username", 60);
-            $table->string("email", 255);
+            $table->string("email", 255)->nullable();
+            $table->text('password');
             $table->string("phone", 20);
             $table->string("fullname", 60);
-            $table->integer("age");
+            $table->integer("age")->nullable();
             $table->tinyInteger("status");
             $table->dateTime("last_active");
             $table->timestamps();
