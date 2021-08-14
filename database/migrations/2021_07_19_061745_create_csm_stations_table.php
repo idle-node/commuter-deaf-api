@@ -16,7 +16,7 @@ class CreateCSMStationsTable extends Migration
         Schema::create('csm_stations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("schedule_master_id");
-            $table->unsignedBigInteger("station_name");
+            $table->string("station_name", 60);
             $table->text("station_address");
             $table->double("station_lat")
                 ->comment("-90 to 90");
