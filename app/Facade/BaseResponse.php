@@ -46,7 +46,7 @@ class BaseResponse{
                 $data,
                 $message,
                 $code
-            )
+            ), $code
         );
     }
 }
